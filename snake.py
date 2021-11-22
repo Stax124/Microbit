@@ -1,7 +1,6 @@
 # Snake game for microbit
 
 import microbit as mb
-import random
 
 playing = True
 delay = 500
@@ -97,14 +96,12 @@ class Snake():
         if self.body[0] == [food.x, food.y]:
             self.append = True
 
-            while True:
-                x = random.randint(0, 4)
-                y = random.randint(0, 4)
-
-                if [x, y] not in self.body:
-                    food.x = x
-                    food.y = y
-                    break
+            for x in range(0, 5):
+                for y in range(0, 5):
+                    if [x, y] not in self.body:
+                        food.x = x
+                        food.y = y
+                        break
 
     def draw(self):
         index = 0
