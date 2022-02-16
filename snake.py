@@ -27,7 +27,7 @@ class Food():
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.brightness = 9
+        self.brightness = 2
 
     def draw(self):
         "Draw self to the screen"
@@ -77,7 +77,6 @@ class Snake():
                 if index == 0:
                     placeholder = self.body[index]
                     self.body[index] = [i[0] + xMove, i[1] + yMove]
-                    self.checkCollision()
                 else:
                     temp = self.body[index]
                     self.body[index] = placeholder
@@ -92,7 +91,9 @@ class Snake():
             if self.body[0] in self.body[1:]:
                 playing = False
 
-    def checkCollision(self):
+            self.checkFood()
+
+    def checkFood(self):
         if self.body[0] == [food.x, food.y]:
             self.append = True
 
