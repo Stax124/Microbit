@@ -1,9 +1,20 @@
 # Snake game for microbit
 
+"""
+Starts in paused state, waiting for button A to be pressed to start
+
+Running:
+    - Snake moves forward by itself
+    - A button to turn left (single press)
+    - B button to turn right (single press)
+    - tilt forward to pause the game
+"""
+
+import random
 import microbit as mb
 
-playing = True
-delay = 500
+playing = True      # Global state of game
+delay = 500         # Frame delay in miliseconds
 
 
 class Dir:
@@ -39,10 +50,12 @@ food = Food(1, 1)
 
 
 class Snake():
-    """Snake as playable object
+    """Snake as playable object, his body contains two elements, the starting coords and y+1 coords
 
     [args]:
-        None
+        x -> x coordinate of the snake
+        y -> y coordinate of the snake
+        direction -> direction of the snake upon starting
     """
 
     def __init__(self, x: int = 2, y: int = 3, direction=Dir.UP):
@@ -94,15 +107,21 @@ class Snake():
             self.checkFood()
 
     def checkFood(self):
+        "Check if snake has eaten food, if yes, grow and place new food"
+
         if self.body[0] == [food.x, food.y]:
             self.append = True
+
+            empty = []
 
             for x in range(0, 5):
                 for y in range(0, 5):
                     if [x, y] not in self.body:
-                        food.x = x
-                        food.y = y
-                        break
+                        empty.append([x, y])
+
+            selected = random.choice(empty)
+            food.x = selected[0]
+            food.y = selected[1]
 
     def draw(self):
         index = 0
