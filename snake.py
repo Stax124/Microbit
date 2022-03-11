@@ -1,7 +1,7 @@
 # Snake game for microbit
 
 """
-Starts in paused state, waiting for button A to be pressed to start
+Starts in paused state, waiting for button A to be pressed
 
 Running:
     - Snake moves forward by itself
